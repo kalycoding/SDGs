@@ -95,7 +95,7 @@ def estimator(data):
   }
   return impact
 
-(estimator(data = {
+estimator(data = {
   "data": {
     "region": {
       "name": "Africa",
