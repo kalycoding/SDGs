@@ -95,7 +95,7 @@ def estimator(data):
   }
   return data
 
-estimator(data = {
+data = {
   "data": {
     "region": {
       "name": "Africa",
@@ -109,6 +109,5 @@ estimator(data = {
     "population": 92931687,
     "totalHospitalBeds": 678874
   }
-})
-
-
+}
+print(estimator(data))
