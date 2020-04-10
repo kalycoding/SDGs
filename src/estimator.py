@@ -110,4 +110,4 @@ data = {
     "totalHospitalBeds": 678874
   }
 }
-print(estimator(data))
+estimator(data)
