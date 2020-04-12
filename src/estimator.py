@@ -22,7 +22,7 @@ def estimator(data):
         def SevereCasesByRequestedTime(self):
             return int(0.15 * self.infectByTime)
         def hospitalBedsByRequestedTime(self, bed):
-            return int(0.35 * (bed - self.infectByTime * 0.15))
+            return int(0.35 * data['totalHospitalBeds']) - int(0.15 * self.infectByTime)
         def casesForICUByRequestedTime(self):
             return int(0.05 * self.infectByTime)
         def casesForVentilatorsByRequestedTime(self):
@@ -51,13 +51,13 @@ def estimator(data):
         def SevereCasesByRequestedTime(self):
             return int(0.15 * self.infectByTime)
         def hospitalBedsByRequestedTime(self, bed):
-            return int(0.35 * (bed - self.infectByTime * 0.15))
+            return int(0.35 * data['totalHospitalBeds']) - int(0.15 * self.infectByTime)
         def casesForICUByRequestedTime(self):
             return int(0.05 * self.infectByTime)
         def casesForVentilatorsByRequestedTime(self):
             return int(0.02 * self.infectByTime)
         def dollarsInFlight(self, population, dollar, days):
-            return (self.infectByTime * population * dollar) / 30
+            return (self.infectByTime * population * dollar) / days
         
     impact = Impact()
     severe = SevereImpact()
