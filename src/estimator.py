@@ -5,6 +5,7 @@ def estimator(data):
         def __init__(self):
             self.currentlyInf = []
             self.infectByTime = []
+            self.severeCases = []
         def currentlyInfected(self, reportCases):
             self.currentlyInf = reportCases * 10
             return self.currentlyInf
@@ -20,9 +21,10 @@ def estimator(data):
             self.infectByTime = self.currentlyInf * (2 ** factor)
             return self.infectByTime
         def SevereCasesByRequestedTime(self):
-            return int(0.15 * self.infectByTime)
+            self.severeCases = int(0.15 * self.infectByTime)
+            return self.severeCases
         def hospitalBedsByRequestedTime(self, bed):
-            return int(0.35 * data['totalHospitalBeds']) - int(0.15 * self.infectByTime)
+            return int(0.35 * data['totalHospitalBeds'] - (0.15 * self.infectByTime))  
         def casesForICUByRequestedTime(self):
             return int(0.05 * self.infectByTime)
         def casesForVentilatorsByRequestedTime(self):
@@ -51,7 +53,7 @@ def estimator(data):
         def SevereCasesByRequestedTime(self):
             return int(0.15 * self.infectByTime)
         def hospitalBedsByRequestedTime(self, bed):
-            return int(0.35 * data['totalHospitalBeds']) - int(0.15 * self.infectByTime)
+            return int(0.35 * data['totalHospitalBeds'] - (0.15 * self.infectByTime)) 
         def casesForICUByRequestedTime(self):
             return int(0.05 * self.infectByTime)
         def casesForVentilatorsByRequestedTime(self):
