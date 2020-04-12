@@ -9,9 +9,9 @@ def estimator(data):
             self.currentlyInf = reportCases * 10
             return self.currentlyInf
         def infectionsByRequestedTime(self, days):
-            if data['data']['periodType'] == 'days':
+            if data['periodType'] == 'days':
                 factor = days // 3
-            elif data['data']['periodType'] == 'weeks':
+            elif data['periodType'] == 'weeks':
                 days = days * 7
                 factor = days // 3
             else:
@@ -28,9 +28,9 @@ def estimator(data):
             self.currentlyInf = reportCases * 50
             return self.currentlyInf
         def infectionsByRequestedTime(self, days):
-            if data['data']['periodType'] == 'days':
+            if data['periodType'] == 'days':
                 factor = days // 3
-            elif data['data']['periodType'] == 'weeks':
+            elif data['periodType'] == 'weeks':
                 days = days * 7
                 factor = days // 3
             else:
@@ -43,8 +43,8 @@ def estimator(data):
     data = {
         "estimate": {
             "impact": {
-                "currentlyInfected": impact.currentlyInfected(data['data']['reportedCases']),
-                "infectionsByRequestedTime": impact.infectionsByRequestedTime(data['data']['timeToElapse']),
+                "currentlyInfected": impact.currentlyInfected(data['reportedCases']),
+                "infectionsByRequestedTime": impact.infectionsByRequestedTime(data['timeToElapse']),
             }
         }
     }
@@ -52,7 +52,6 @@ def estimator(data):
     return data
 
 data = {
-    "data": {
     "region": {
       "name": "Africa",
       "avgAge": 19.7,
@@ -64,7 +63,6 @@ data = {
     "reportedCases": 2747,
     "population": 92931687,
     "totalHospitalBeds": 678874
-    }
 }
 estimator(data)
 
