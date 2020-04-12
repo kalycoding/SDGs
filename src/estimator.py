@@ -1,5 +1,5 @@
 import json
-from kali import *
+
 def estimator(data):
     class Impact:
         def __init__(self):
@@ -40,7 +40,7 @@ def estimator(data):
             return self.infectByTime
     impact = Impact()
     severe = SevereImpact()
-    output = {
+    data = {
         "estimate": {
             "impact": {
                 "currentlyInfected": impact.currentlyInfected(data['data']['reportedCases']),
@@ -48,8 +48,8 @@ def estimator(data):
             }
         }
     }
-    return output
-
+    
+    return data
 
 data = {
     "data": {
