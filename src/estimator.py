@@ -1,6 +1,54 @@
 import json
+from kali import *
 def estimator(data):
-  return data
+    class Impact:
+        def __init__(self):
+            self.currentlyInf = []
+            self.infectByTime = []
+        def currentlyInfected(self, reportCases):
+            self.currentlyInf = reportCases * 10
+            return self.currentlyInf
+        def infectionsByRequestedTime(self, days):
+            if data['data']['periodType'] == 'days':
+                factor = days // 3
+            elif data['data']['periodType'] == 'weeks':
+                days = days * 7
+                factor = days // 3
+            else:
+                days = days * 30
+                factor = days // 3
+            self.infectByTime = self.currentlyInf * (2 ** factor)
+            return self.infectByTime
+
+    class SevereImpact:
+        def __init__(self):
+            self.currentlyInf = []
+            self.infectByTime = []
+        def currentlyInfected(self, reportCases):
+            self.currentlyInf = reportCases * 50
+            return self.currentlyInf
+        def infectionsByRequestedTime(self, days):
+            if data['data']['periodType'] == 'days':
+                factor = days // 3
+            elif data['data']['periodType'] == 'weeks':
+                days = days * 7
+                factor = days // 3
+            else:
+                days = days * 30
+                factor = days // 3
+            self.infectByTime = self.currentlyInf * (2 ** factor)
+            return self.infectByTime
+    impact = Impact()
+    severe = SevereImpact()
+    output = {
+        "estimate": {
+            "impact": {
+                "currentlyInfected": impact.currentlyInfected(data['data']['reportedCases']),
+                "infectionsByRequestedTime": impact.infectionsByRequestedTime(data['data']['timeToElapse']),
+            }
+        }
+    }
+    return output
 
 
 data = {
@@ -18,5 +66,5 @@ data = {
     "totalHospitalBeds": 678874
     }
 }
-estimator(data)
+print(estimator(data))
 
