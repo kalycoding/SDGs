@@ -41,12 +41,15 @@ def estimator(data):
     impact = Impact()
     severe = SevereImpact()
     data = {
-        "estimate": {
             "impact": {
                 "currentlyInfected": impact.currentlyInfected(data['reportedCases']),
                 "infectionsByRequestedTime": impact.infectionsByRequestedTime(data['timeToElapse']),
+            },
+            "severe": {
+                "currentlyInfected": severe.currentlyInfected(data['reportedCases']),
+                "infectionsByRequestedTime": severe.infectionsByRequestedTime(data['timeToElapse']),
             }
-        }
+        
     }
     
     return data
