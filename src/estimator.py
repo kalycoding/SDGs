@@ -1,3 +1,4 @@
+import json
 def estimator(data):
   class Impact:
     def __init__(self):
@@ -32,7 +33,7 @@ def estimator(data):
             days = days * 7
         else:
             days = days * 30
-        return (self.infectByTime * population * dollar * days)
+        return (self.infectByTime * population * dollar) / days
 
   class SevereImpact:
     def __init__(self):
@@ -93,10 +94,12 @@ def estimator(data):
         }
     }
   }
+  
   return data
 
+
 data = {
-  "data": {
+    "data": {
     "region": {
       "name": "Africa",
       "avgAge": 19.7,
@@ -108,6 +111,7 @@ data = {
     "reportedCases": 2747,
     "population": 92931687,
     "totalHospitalBeds": 678874
-  }
+    }
 }
-estimator(data)
+print(estimator(data=data))
+
