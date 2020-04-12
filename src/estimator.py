@@ -95,7 +95,7 @@ def estimator(data):
     }
   }
   
-  return data
+  return 12
 
 
 data = {
