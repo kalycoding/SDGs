@@ -45,7 +45,7 @@ def estimator(data):
                 "currentlyInfected": impact.currentlyInfected(data['reportedCases']),
                 "infectionsByRequestedTime": impact.infectionsByRequestedTime(data['timeToElapse']),
             },
-            "severe": {
+            "severeImpact": {
                 "currentlyInfected": severe.currentlyInfected(data['reportedCases']),
                 "infectionsByRequestedTime": severe.infectionsByRequestedTime(data['timeToElapse']),
             }
