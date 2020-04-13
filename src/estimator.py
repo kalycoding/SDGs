@@ -30,7 +30,7 @@ def estimator(data):
         def casesForVentilatorsByRequestedTime(self):
             return int(0.02 * self.infectByTime)
         def dollarsInFlight(self):
-            return math.trunc((self.infectByTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) / data['timeToElapse'])
+            return math.trunc((self.infectByTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) * data['timeToElapse'])
 
     class SevereImpact:
         def __init__(self):
@@ -59,7 +59,13 @@ def estimator(data):
         def casesForVentilatorsByRequestedTime(self):
             return int(0.02 * self.infectByTime)
         def dollarsInFlight(self):
-            return math.trunc((self.infectByTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) / data['timeToElapse'])
+            if data['periodType'] == 'days':
+                factor = data['timeToElapse'] * 1
+            elif data['periodType'] == 'weeks':
+                factor = factor = data['timeToElapse'] * 7
+            else:
+                factor = factor = data['timeToElapse'] * 30
+            return math.trunc((self.infectByTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) * factor)
         
     impact = Impact()
     severe = SevereImpact()
@@ -100,5 +106,5 @@ data = {
     "population": 92931687,
     "totalHospitalBeds": 678874
 }
-estimator(data)
+print(estimator(data))
 
