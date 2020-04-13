@@ -76,7 +76,7 @@ def estimator(data):
         
     impact = Impact()
     severe = SevereImpact()
-    data = {
+    dat = {
             "impact": {
                 "currentlyInfected": impact.currentlyInfected(data['reportedCases']),
                 "infectionsByRequestedTime": impact.infectionsByRequestedTime(data['timeToElapse']),
@@ -97,8 +97,8 @@ def estimator(data):
             }
         
     }
-    data = json.dumps(data)
-    return data
+    data = json.dumps(dat)
+    return dat
 
 data = {
     "region": {
@@ -113,5 +113,5 @@ data = {
     "population": 92931687,
     "totalHospitalBeds": 678874
 }
-estimator(data)
+print(estimator(data))
 
