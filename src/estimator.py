@@ -1,4 +1,4 @@
-import json
+import math
 
 def estimator(data):
     class Impact:
@@ -29,8 +29,8 @@ def estimator(data):
             return int(0.05 * self.infectByTime)
         def casesForVentilatorsByRequestedTime(self):
             return int(0.02 * self.infectByTime)
-        def dollarsInFlight(self, population, dollar, days):
-            return (self.infectByTime * population * dollar) / 30
+        def dollarsInFlight(self):
+            return math.trunc((self.infectByTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) / data['timeToElapse'])
 
     class SevereImpact:
         def __init__(self):
@@ -58,8 +58,8 @@ def estimator(data):
             return int(0.05 * self.infectByTime)
         def casesForVentilatorsByRequestedTime(self):
             return int(0.02 * self.infectByTime)
-        def dollarsInFlight(self, population, dollar, days):
-            return (self.infectByTime * population * dollar) / days
+        def dollarsInFlight(self):
+            return math.trunc((self.infectByTime * data['region']['avgDailyIncomePopulation'] * data['region']['avgDailyIncomeInUSD']) * data['timeToElapse'])
         
     impact = Impact()
     severe = SevereImpact()
@@ -71,7 +71,7 @@ def estimator(data):
                 "hospitalBedsByRequestedTime": impact.hospitalBedsByRequestedTime(data['totalHospitalBeds']),
                 "casesForICUByRequestedTime": impact.casesForICUByRequestedTime(),
                 "casesForVentilatorsByRequestedTime": impact.casesForVentilatorsByRequestedTime(),
-                "dollarsInFlight": impact.dollarsInFlight(data['region']['avgDailyIncomePopulation'],data['region']['avgDailyIncomeInUSD'], data['timeToElapse'])
+                "dollarsInFlight": impact.dollarsInFlight()
             },
             "severeImpact": {
                 "currentlyInfected": severe.currentlyInfected(data['reportedCases']),
@@ -80,7 +80,7 @@ def estimator(data):
                 "hospitalBedsByRequestedTime": severe.hospitalBedsByRequestedTime(data['totalHospitalBeds']),
                 "casesForICUByRequestedTime": severe.casesForICUByRequestedTime(),
                 "casesForVentilatorsByRequestedTime": severe.casesForVentilatorsByRequestedTime(),
-                "dollarsInFlight": severe.dollarsInFlight(data['region']['avgDailyIncomePopulation'],data['region']['avgDailyIncomeInUSD'], data['timeToElapse'])
+                "dollarsInFlight": severe.dollarsInFlight()
             }
         
     }
