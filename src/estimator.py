@@ -1,4 +1,5 @@
 import math
+import json
 
 def estimator(data):
     class Impact:
@@ -96,7 +97,7 @@ def estimator(data):
             }
         
     }
-    
+    data = json.dumps(data)
     return data
 
 data = {
@@ -112,5 +113,5 @@ data = {
     "population": 92931687,
     "totalHospitalBeds": 678874
 }
-print(estimator(data))
+estimator(data)
 
