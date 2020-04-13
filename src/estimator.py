@@ -1,4 +1,5 @@
 import math
+import json
 
 def estimator(data):
     class Impact:
@@ -75,7 +76,7 @@ def estimator(data):
         
     impact = Impact()
     severe = SevereImpact()
-    data = {
+    dat = {
             "impact": {
                 "currentlyInfected": impact.currentlyInfected(data['reportedCases']),
                 "infectionsByRequestedTime": impact.infectionsByRequestedTime(data['timeToElapse']),
@@ -96,8 +97,8 @@ def estimator(data):
             }
         
     }
-    
-    return data
+    data = json.dumps(dat)
+    return dat
 
 data = {
     "region": {
